@@ -1,11 +1,12 @@
 package models
 
-import "gorm.io/gorm"
+// import "gorm.io/gorm"
 
 type AssignmentToTrip struct {
-	gorm.Model
-	ID           uint `gorm:"primaryKey"`
-	MoneySpent   int
+	ID             uint `gorm:"primaryKey"`
+	MoneySpent     int `gorm:"not null"`
+	EmployeeID     uint
+	BusinessTripID uint
 	Employee     Employee     `gorm:"foreignKey:EmployeeID;references:ID"`
 	BusinessTrip BusinessTrip `gorm:"foreignKey:BusinessTripID;references:ID"`
 }
