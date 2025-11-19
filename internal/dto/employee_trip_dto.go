@@ -1,8 +1,7 @@
 package dto
 
-type AssignmentToTrip struct {
-	ID           uint
-	MoneySpend   int
+type EmployeeTripDTO struct {
 	Employee     EmployeeDTO
 	BuisnessTrip BuisnessTripDTO
+	MoneySpent   int
 }

@@ -7,4 +7,5 @@ type BuisnessTripDTO struct {
 	Destination string
 	StartAt     time.Time
 	EndAt       time.Time
+	Employees   []EmployeeTripDTO
 }

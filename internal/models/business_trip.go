@@ -8,6 +8,5 @@ type BusinessTrip struct {
 	StartAt     time.Time          `gorm:"type:date;not null"`
 	EndAt       time.Time          `gorm:"type:date;not null"`
 	Assignments []AssignmentToTrip `gorm:"foreignKey:BusinessTripID"`
-	// Employees   []Employee         `gorm:"many2many:assignment_to_trips;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
-	Employees   []Employee         `gorm:"many2many:assignment_to_trip;joinForeignKey:BusinessTripID;References:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	Employees   []Employee         `gorm:"many2many:assignment_to_trips;joinForeignKey:BusinessTripID;References:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 }
