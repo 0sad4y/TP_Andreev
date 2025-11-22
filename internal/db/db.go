@@ -1,7 +1,7 @@
 package db
 
 import (
-	"social-media-analyzer/internal/config"
+	"TP_Andreev/internal/config"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

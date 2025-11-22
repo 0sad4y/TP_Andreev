@@ -1,4 +1,4 @@
-module social-media-analyzer
+module TP_Andreev
 
 go 1.24.0
 
