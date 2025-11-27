@@ -1,40 +1,31 @@
-// Данные для одной строки статистики
-const data = [
-    {
-        totalMoney: 7500,
-        tripsCount: 25,
-        avgMoney: 300,
-        medianMoney: 280
-    }
-];
-
 document.addEventListener("DOMContentLoaded", () => {
-    // Рендер таблицы (одна строка)
-    const tbody = document.getElementById("data-body");
+    const tbody = document.getElementById("stats-body");
     tbody.innerHTML = "";
 
-    data.forEach(item => {
-        const row = `
-            <tr>
-                <td>${item.totalMoney}</td>
-                <td>${item.tripsCount}</td>
-                <td>${item.avgMoney}</td>
-                <td>${item.medianMoney}</td>
-            </tr>`;
-        tbody.insertAdjacentHTML("beforeend", row);
-    });
+    const row = `
+        <tr>
+            <td>${employeeData.tripCount}</td>
+            <td>${employeeData.moneySpent}</td>
+            <td>${employeeData.avgTripCount}</td>
+            <td>${employeeData.avgMoneySpent}</td>
+        </tr>`;
+    tbody.insertAdjacentHTML("beforeend", row);
 
-    // === ГРАФИК: Общие траты ===
-    const ctxBar = document.getElementById('barChart').getContext('2d');
-    new Chart(ctxBar, {
-        type: 'bar',
+    const labels = chartData.map(d => d.x);
+    const data = chartData.map(d => d.y);
+
+    const ctx = document.getElementById('chart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
         data: {
-            labels: ['Общие траты', 'Средние траты', 'Медиана'],
+            labels: labels,
             datasets: [{
-                label: 'Деньги',
-                data: [data[0].totalMoney, data[0].avgMoney, data[0].medianMoney],
-                backgroundColor: ['#2e8b57', '#3cb371', '#90ee90'],
-                borderRadius: 8
+                label: '',
+                data: data,
+                borderColor: '#4cb00a',
+                backgroundColor: 'rgba(60,179,113,0.2)',
+                tension: 0.3,
+                pointStyle: false,
             }]
         },
         options: {
