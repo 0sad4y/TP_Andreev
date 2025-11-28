@@ -62,19 +62,6 @@ func (s *Service) GetAllEmployeeTrips() *[]EmployeeTripData {
 	}
 
 	return &res
-
-	// return &[]EmployeeTripData{
-	// 	{Id: 1, Name: "Имя 1", Date: "01.01.2025", Duration: 2, Destination: "Куда A", MoneySpent: 500},
-	// 	{Id: 2, Name: "Имя 2", Date: "05.01.2025", Duration: 3, Destination: "Куда B", MoneySpent: 800},
-	// 	{Id: 3, Name: "Имя 3", Date: "10.01.2025", Duration: 1, Destination: "Куда C", MoneySpent: 300},
-	// 	{Id: 4, Name: "Имя 4", Date: "12.01.2025", Duration: 4, Destination: "Куда D", MoneySpent: 700},
-	// 	{Id: 5, Name: "Имя 5", Date: "15.01.2025", Duration: 5, Destination: "Куда E", MoneySpent: 1200},
-	// 	{Id: 6, Name: "Имя 6", Date: "18.01.2025", Duration: 2, Destination: "Куда F", MoneySpent: 400},
-	// 	{Id: 7, Name: "Имя 7", Date: "20.01.2025", Duration: 3, Destination: "Куда G", MoneySpent: 900},
-	// 	{Id: 8, Name: "Имя 8", Date: "22.01.2025", Duration: 2, Destination: "Куда H", MoneySpent: 600},
-	// 	{Id: 9, Name: "Имя 9", Date: "25.01.2025", Duration: 1, Destination: "Куда I", MoneySpent: 250},
-	// 	{Id: 10, Name: "Имя 10", Date: "28.01.2025", Duration: 4, Destination: "Куда J", MoneySpent: 1000},
-	// }
 }
 
 func (s *Service) GetMoneySpentByAllYears() *[]GraphData {
@@ -107,19 +94,6 @@ func (s *Service) GetMoneySpentByAllYears() *[]GraphData {
 	}
 
 	return &res
-
-	// return &[]GraphData{
-	// 	{X: 2001, Y: 10000},
-	// 	{X: 2002, Y: 11000},
-	// 	{X: 2003, Y: 12000},
-	// 	{X: 2004, Y: 13000},
-	// 	{X: 2005, Y: 20000},
-	// 	{X: 2006, Y: 25000},
-	// 	{X: 2007, Y: 30000},
-	// 	{X: 2008, Y: 10000},
-	// 	{X: 2009, Y: 12000},
-	// 	{X: 2010, Y: 23000},
-	// }
 }
 
 func (s *Service) GetTripCountByAllYears() *[]GraphData {
@@ -149,19 +123,6 @@ func (s *Service) GetTripCountByAllYears() *[]GraphData {
 	}
 
 	return &res
-
-	// return &[]GraphData{
-	// 	{X: 2001, Y: 3},
-	// 	{X: 2002, Y: 4},
-	// 	{X: 2003, Y: 3},
-	// 	{X: 2004, Y: 4},
-	// 	{X: 2005, Y: 5},
-	// 	{X: 2006, Y: 6},
-	// 	{X: 2007, Y: 7},
-	// 	{X: 2008, Y: 3},
-	// 	{X: 2009, Y: 4},
-	// 	{X: 2010, Y: 5},
-	// }
 }
 
 func (s *Service) GetEmployeeTripCountByAllYears(id int) *[]GraphData {
@@ -191,19 +152,6 @@ func (s *Service) GetEmployeeTripCountByAllYears(id int) *[]GraphData {
 	}
 
 	return &res
-
-	// return &[]GraphData{
-	// 	{X: 2001, Y: 10000},
-	// 	{X: 2002, Y: 11000},
-	// 	{X: 2003, Y: 12000},
-	// 	{X: 2004, Y: 13000},
-	// 	{X: 2005, Y: 20000},
-	// 	{X: 2006, Y: 25000},
-	// 	{X: 2007, Y: 30000},
-	// 	{X: 2008, Y: 10000},
-	// 	{X: 2009, Y: 12000},
-	// 	{X: 2010, Y: 23000},
-	// }
 }
 
 func (s *Service) GetEmployeeStat(id int) *EmployeeData {
