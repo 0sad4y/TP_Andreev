@@ -11,37 +11,37 @@ type EmployeeRepo struct {
 	DB *gorm.DB
 }
 
-func (repo *EmployeeRepo) Find(id uint) (dto.EmployeeDTO, error) {
+func (repo *EmployeeRepo) Find(id uint) (*dto.EmployeeDTO, error) {
 	var employee models.Employee
 	err := repo.DB.Model(&models.Employee{}).Preload("Assignments").Preload("Assignments.BusinessTrip").Find(&employee, id).Error
-	
+
 	employeeDTO := dto.EmployeeDTO{
-		ID: employee.ID,
+		ID:   employee.ID,
 		Name: employee.Name,
 	}
 
 	var employeeTrips []dto.EmployeeTripDTO
 	for _, a := range employee.Assignments {
 		businessTripDTO := dto.BuisnessTripDTO{
-			ID: a.BusinessTrip.ID,
+			ID:          a.BusinessTrip.ID,
 			Destination: a.BusinessTrip.Destination,
-			StartAt: a.BusinessTrip.StartAt,
-			EndAt: a.BusinessTrip.EndAt,
+			StartAt:     a.BusinessTrip.StartAt,
+			EndAt:       a.BusinessTrip.EndAt,
 		}
 		trip := dto.EmployeeTripDTO{
-			MoneySpent: a.MoneySpent,
-			Employee: employeeDTO,
+			MoneySpent:   a.MoneySpent,
+			Employee:     employeeDTO,
 			BuisnessTrip: businessTripDTO,
 		}
 		employeeTrips = append(employeeTrips, trip)
 	}
-	
+
 	employeeDTO.Trips = employeeTrips
 
-	return employeeDTO, err
+	return &employeeDTO, err
 }
 
-func (repo *EmployeeRepo) All() ([]dto.EmployeeDTO, error) {
+func (repo *EmployeeRepo) All() (*[]dto.EmployeeDTO, error) {
 	var employees []models.Employee
 	err := repo.DB.Model(&models.Employee{}).Preload("Assignments").Preload("Assignments.BusinessTrip").Find(&employees).Error
 
@@ -49,29 +49,29 @@ func (repo *EmployeeRepo) All() ([]dto.EmployeeDTO, error) {
 
 	for _, e := range employees {
 		employeeDTO := dto.EmployeeDTO{
-			ID: e.ID,
+			ID:   e.ID,
 			Name: e.Name,
 		}
 
 		var employeeTrips []dto.EmployeeTripDTO
 		for _, a := range e.Assignments {
 			businessTripDTO := dto.BuisnessTripDTO{
-				ID: a.BusinessTrip.ID,
+				ID:          a.BusinessTrip.ID,
 				Destination: a.BusinessTrip.Destination,
-				StartAt: a.BusinessTrip.StartAt,
-				EndAt: a.BusinessTrip.EndAt,
+				StartAt:     a.BusinessTrip.StartAt,
+				EndAt:       a.BusinessTrip.EndAt,
 			}
 			trip := dto.EmployeeTripDTO{
-				MoneySpent: a.MoneySpent,
-				Employee: employeeDTO,
+				MoneySpent:   a.MoneySpent,
+				Employee:     employeeDTO,
 				BuisnessTrip: businessTripDTO,
 			}
 			employeeTrips = append(employeeTrips, trip)
 		}
-		
+
 		employeeDTO.Trips = employeeTrips
 		result = append(result, employeeDTO)
 	}
 
-	return result, err
+	return &result, err
 }
