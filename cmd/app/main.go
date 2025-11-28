@@ -2,12 +2,16 @@ package main
 
 import (
 	"log"
+
 	"net/http"
 
 	"TP_Andreev/internal/config"
 	"TP_Andreev/internal/db"
 	"TP_Andreev/internal/db/migrations"
-	"TP_Andreev/internal/transport/http/controller"
+	"TP_Andreev/internal/repo"
+	"TP_Andreev/internal/service"
+	"TP_Andreev/internal/transport/http/controller/employee_controller"
+	"TP_Andreev/internal/transport/http/controller/main_controller"
 	"TP_Andreev/internal/transport/http/router"
 )
 
@@ -26,12 +30,17 @@ func main() {
 		log.Fatalf("auto-migrate failed: %v", err)
 	}
 
+	service := service.New(
+		repo.EmployeeRepo{DB: db},
+		repo.BusinessTripRepo{DB: db},
+	)
+
 	// Initialize router
 	r := router.New()
 
 	// Initialize controller
-	pageCtrl := &controller.MainController{}
-	employeeCtrl := &controller.EmployeeController{}
+	pageCtrl := main_controller.New(*service)
+	employeeCtrl := employee_controller.New(*service)
 
 	// Serve static files
 	fs := http.FileServer(http.Dir("web/static"))
