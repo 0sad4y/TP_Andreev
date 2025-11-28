@@ -1,0 +1,54 @@
+.green-table {
+    background-color: #e9f7e9;
+    border-radius: 15px;
+    overflow: hidden;
+    font-size: 0.9rem;
+}
+
+.green-table th {
+    background-color: #055c05;
+    color: #fff;
+    text-align: center;
+    padding: 4px !important;
+}
+
+.green-table td {
+    background-color: #f3fff3;
+    text-align: center;
+    padding: 4px !important;
+}
+
+.green-table tr:hover td {
+    background-color: #b6e6b6;
+}
+
+.green-table th, .green-table td {
+    border-color: #9cd89c !important;
+}
+
+.pagination .page-link {
+    color: #2f7a2f;
+    border-color: #c8e8c8;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #41a541;
+    border-color: #3b933b;
+    color: #fff;
+}
+
+.pagination .page-link:hover {
+    background-color: #b6e6b6;
+    border-color: #41a541;
+}
+
+.employeeLink {
+    color: #4cb00a;
+    text-decoration: none;
+}
+
+.text-title {
+    color: #4cb00a;
+}
