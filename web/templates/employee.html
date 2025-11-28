@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Командировки</title>
+    <title>{{.Title}}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
@@ -14,7 +14,7 @@
                 Назад            
             </button>
         </a>
-        <h5 class="mb-4 text-center text-title">Иванов Иван Иванович</h5>
+        <h5 class="mb-4 text-center text-title">{{.Title}}</h5>
         <div class="table-responsive">
             <table class="table table-bordered table-hover align-middle green-table">
                 <thead>
@@ -36,27 +36,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const employeeData = {
-            name: "Иванов Иван Иванович",
-            tripCount: 10,
-            moneySpent: 53100,
-            avgTripCount: 3,
-            avgMoneySpent: 5000,
-        };
-        const chartData = [
-            { x: 2001, y: 10000},
-            { x: 2002, y: 11000},
-            { x: 2003, y: 12000},
-            { x: 2004, y: 13000},
-            { x: 2005, y: 20000},
-            { x: 2006, y: 25000},
-            { x: 2007, y: 30000},
-            { x: 2008, y: 10000},
-            { x: 2009, y: 12000},
-            { x: 2010, y: 23000},
-        ];
-    </script>
+    {{template "jsData" .JS}}
     <script src="/static/js/employee.js"></script>
 </body>
 </html>
