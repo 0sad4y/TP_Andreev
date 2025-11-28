@@ -31,7 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
         options: {
             responsive: true,
             plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true } }
+            scales: { y: { 
+                beginAtZero: true,
+                ticks: { stepSize: 1 }
+            }}
         }
     });
 });
