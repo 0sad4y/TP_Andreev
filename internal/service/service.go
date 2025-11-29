@@ -2,6 +2,7 @@ package service
 
 import (
 	"TP_Andreev/internal/repo"
+	"sort"
 )
 
 type Service struct {
@@ -93,6 +94,10 @@ func (s *Service) GetMoneySpentByAllYears() *[]GraphData {
 		res = append(res, data)
 	}
 
+	sort.Slice(res, func(i, j int) bool {
+		return res[i].X < res[j].X
+	})
+
 	return &res
 }
 
@@ -122,6 +127,10 @@ func (s *Service) GetTripCountByAllYears() *[]GraphData {
 		res = append(res, data)
 	}
 
+	sort.Slice(res, func(i, j int) bool {
+		return res[i].X < res[j].X
+	})
+
 	return &res
 }
 
@@ -150,6 +159,10 @@ func (s *Service) GetEmployeeTripCountByAllYears(id int) *[]GraphData {
 		}
 		res = append(res, data)
 	}
+
+	sort.Slice(res, func(i, j int) bool {
+		return res[i].X < res[j].X
+	})
 
 	return &res
 }
