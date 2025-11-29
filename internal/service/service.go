@@ -44,7 +44,7 @@ func (s *Service) GetAllEmployeeTrips() *[]EmployeeTripData {
 		id := d.ID
 		name := d.Name
 		for _, t := range d.Trips {
-			date := t.BuisnessTrip.StartAt.Format("01.02.2006")
+			date := t.BuisnessTrip.StartAt.Format("02.01.2006")
 			duration := int(t.BuisnessTrip.EndAt.Sub(t.BuisnessTrip.StartAt).Hours()) / 24
 			destination := t.BuisnessTrip.Destination
 			moneySpent := t.MoneySpent
