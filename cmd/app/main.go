@@ -8,7 +8,8 @@ import (
 	"TP_Andreev/internal/config"
 	"TP_Andreev/internal/db"
 	"TP_Andreev/internal/db/migrations"
-	"TP_Andreev/internal/repo"
+	"TP_Andreev/internal/repo/business_trip_repo"
+	"TP_Andreev/internal/repo/employee_repo"
 	"TP_Andreev/internal/service"
 	"TP_Andreev/internal/transport/http/controller/employee_controller"
 	"TP_Andreev/internal/transport/http/controller/main_controller"
@@ -31,8 +32,8 @@ func main() {
 	}
 
 	service := service.New(
-		repo.EmployeeRepo{DB: db},
-		repo.BusinessTripRepo{DB: db},
+		employee_repo.New(db),
+		business_trip_repo.New(db),
 	)
 
 	// Initialize router

@@ -1,4 +1,4 @@
-package repo
+package business_trip_repo
 
 import (
 	"TP_Andreev/internal/dto"
@@ -8,12 +8,16 @@ import (
 )
 
 type BusinessTripRepo struct {
-	DB *gorm.DB
+	db *gorm.DB
+}
+
+func New(db *gorm.DB) *BusinessTripRepo {
+	return &BusinessTripRepo{db: db}
 }
 
 func (repo *BusinessTripRepo) All() (*[]dto.BuisnessTripDTO, error) {
 	var businessTrips []models.BusinessTrip
-	err := repo.DB.Model(&models.BusinessTrip{}).Preload("Assignments").Preload("Assignments.Employee").Find(&businessTrips).Error
+	err := repo.db.Model(&models.BusinessTrip{}).Preload("Assignments").Preload("Assignments.Employee").Find(&businessTrips).Error
 
 	var result []dto.BuisnessTripDTO
 

@@ -1,4 +1,4 @@
-package repo
+package employee_repo
 
 import (
 	"TP_Andreev/internal/dto"
@@ -8,12 +8,16 @@ import (
 )
 
 type EmployeeRepo struct {
-	DB *gorm.DB
+	db *gorm.DB
+}
+
+func New(db *gorm.DB) *EmployeeRepo {
+	return &EmployeeRepo{db: db}
 }
 
 func (repo *EmployeeRepo) Find(id uint) (*dto.EmployeeDTO, error) {
 	var employee models.Employee
-	err := repo.DB.Model(&models.Employee{}).Preload("Assignments").Preload("Assignments.BusinessTrip").Find(&employee, id).Error
+	err := repo.db.Model(&models.Employee{}).Preload("Assignments").Preload("Assignments.BusinessTrip").Find(&employee, id).Error
 
 	employeeDTO := dto.EmployeeDTO{
 		ID:   employee.ID,
@@ -43,7 +47,7 @@ func (repo *EmployeeRepo) Find(id uint) (*dto.EmployeeDTO, error) {
 
 func (repo *EmployeeRepo) All() (*[]dto.EmployeeDTO, error) {
 	var employees []models.Employee
-	err := repo.DB.Model(&models.Employee{}).Preload("Assignments").Preload("Assignments.BusinessTrip").Find(&employees).Error
+	err := repo.db.Model(&models.Employee{}).Preload("Assignments").Preload("Assignments.BusinessTrip").Find(&employees).Error
 
 	var result []dto.EmployeeDTO
 
