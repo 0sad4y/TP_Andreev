@@ -1,13 +1,14 @@
 package service
 
 import (
-	"TP_Andreev/internal/repo"
+	repository "TP_Andreev/internal/repo"
 	"sort"
+	"time"
 )
 
 type Service struct {
-	employeeRepo     repo.EmployeeRepo
-	businessTripRepo repo.BusinessTripRepo
+	employeeRepo     repository.EmployeeRepo
+	businessTripRepo repository.BusinessTripRepo
 }
 
 type EmployeeTripData struct {
@@ -32,7 +33,7 @@ type GraphData struct {
 	Y int `json:"y"`
 }
 
-func New(employeeRepo repo.EmployeeRepo, businessTripRepo repo.BusinessTripRepo) *Service {
+func New(employeeRepo repository.EmployeeRepo, businessTripRepo repository.BusinessTripRepo) *Service {
 	return &Service{employeeRepo: employeeRepo, businessTripRepo: businessTripRepo}
 }
 
@@ -61,6 +62,12 @@ func (s *Service) GetAllEmployeeTrips() *[]EmployeeTripData {
 			res = append(res, empTripData)
 		}
 	}
+
+	sort.Slice(res, func(i, j int) bool {
+		t1, _ := time.Parse("02.01.2006", res[i].Date)
+		t2, _ := time.Parse("02.01.2006", res[j].Date)
+		return t2.Before(t1)
+	})
 
 	return &res
 }
