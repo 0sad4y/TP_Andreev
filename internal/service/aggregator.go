@@ -4,19 +4,16 @@ import (
 	"sort"
 )
 
-// YearlyAggregator implements Template Method pattern for yearly aggregation
 type YearlyAggregator struct {
 	counters map[int]int
 }
 
-// NewYearlyAggregator creates a new aggregator
 func NewYearlyAggregator() *YearlyAggregator {
 	return &YearlyAggregator{
 		counters: make(map[int]int),
 	}
 }
 
-// AddValue adds a value to the counter for a given year (Template Method)
 func (ya *YearlyAggregator) AddValue(year int, value int) {
 	if _, exists := ya.counters[year]; !exists {
 		ya.counters[year] = value
@@ -25,7 +22,6 @@ func (ya *YearlyAggregator) AddValue(year int, value int) {
 	}
 }
 
-// GetResults returns sorted GraphData results
 func (ya *YearlyAggregator) GetResults() *[]GraphData {
 	res := []GraphData{}
 
@@ -37,7 +33,6 @@ func (ya *YearlyAggregator) GetResults() *[]GraphData {
 		res = append(res, data)
 	}
 
-	// Sort by year
 	sort.Slice(res, func(i, j int) bool {
 		return res[i].X < res[j].X
 	})
@@ -45,21 +40,18 @@ func (ya *YearlyAggregator) GetResults() *[]GraphData {
 	return &res
 }
 
-// YearlyStatAggregator aggregates both trip count and money spent statistics per year
 type YearlyStatAggregator struct {
-	tripCounters map[int]int
+	tripCounters  map[int]int
 	moneyCounters map[int]int
 }
 
-// NewYearlyStatAggregator creates a new stat aggregator
 func NewYearlyStatAggregator() *YearlyStatAggregator {
 	return &YearlyStatAggregator{
-		tripCounters: make(map[int]int),
+		tripCounters:  make(map[int]int),
 		moneyCounters: make(map[int]int),
 	}
 }
 
-// AddValue adds both trip count and money spent for a year (Template Method pattern)
 func (ysa *YearlyStatAggregator) AddValue(year int, tripCount int, moneySpent int) {
 	if _, exists := ysa.tripCounters[year]; !exists {
 		ysa.tripCounters[year] = tripCount
@@ -74,7 +66,6 @@ func (ysa *YearlyStatAggregator) AddValue(year int, tripCount int, moneySpent in
 	}
 }
 
-// GetTotalTripCount returns total trips across all years
 func (ysa *YearlyStatAggregator) GetTotalTripCount() int {
 	sum := 0
 	for _, v := range ysa.tripCounters {
@@ -83,7 +74,6 @@ func (ysa *YearlyStatAggregator) GetTotalTripCount() int {
 	return sum
 }
 
-// GetTotalMoneySpent returns total money spent across all years
 func (ysa *YearlyStatAggregator) GetTotalMoneySpent() int {
 	sum := 0
 	for _, v := range ysa.moneyCounters {
@@ -92,7 +82,6 @@ func (ysa *YearlyStatAggregator) GetTotalMoneySpent() int {
 	return sum
 }
 
-// GetAverageTripsPerYear returns average trips per year
 func (ysa *YearlyStatAggregator) GetAverageTripsPerYear() float32 {
 	if len(ysa.tripCounters) == 0 {
 		return 0
@@ -100,7 +89,6 @@ func (ysa *YearlyStatAggregator) GetAverageTripsPerYear() float32 {
 	return float32(ysa.GetTotalTripCount()) / float32(len(ysa.tripCounters))
 }
 
-// GetAverageMoneyPerYear returns average money spent per year
 func (ysa *YearlyStatAggregator) GetAverageMoneyPerYear() float32 {
 	if len(ysa.moneyCounters) == 0 {
 		return 0

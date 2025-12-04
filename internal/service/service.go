@@ -84,13 +84,13 @@ func (s *Service) GetTripCountByAllYears() *[]GraphData {
 
 func (s *Service) GetEmployeeTripCountByAllYears(id int) *[]GraphData {
 	data, _ := s.employeeRepo.Find(uint(id))
-	
+
 	aggregator := NewYearlyAggregator()
 	for _, t := range (*data).Trips {
 		year := t.BuisnessTrip.StartAt.Year()
 		aggregator.AddValue(year, 1)
 	}
-	
+
 	return aggregator.GetResults()
 }
 
@@ -113,14 +113,10 @@ func (s *Service) GetEmployeeStat(id int) *EmployeeData {
 	}
 }
 
-// Template Method: aggregateByYearsWithStrategy (Template Method Pattern)
-// This method defines the skeleton of the aggregation algorithm.
-// The strategy parameter encapsulates how to extract values from the data.
 func (s *Service) aggregateByYearsWithStrategy(strategy AggregationStrategy) *[]GraphData {
 	data, _ := s.employeeRepo.All()
 	aggregator := NewYearlyAggregator()
 
-	// Template: iterate through employees and their trips, extract value using strategy
 	for _, employee := range *data {
 		for _, trip := range employee.Trips {
 			year := trip.BuisnessTrip.StartAt.Year()
@@ -132,13 +128,10 @@ func (s *Service) aggregateByYearsWithStrategy(strategy AggregationStrategy) *[]
 	return aggregator.GetResults()
 }
 
-// Template Method: aggregateTripsWithStrategy (Template Method Pattern)
-// Similar to above but works with business trips directly instead of employees.
 func (s *Service) aggregateTripsWithStrategy(strategy AggregationStrategy) *[]GraphData {
 	data, _ := s.businessTripRepo.All()
 	aggregator := NewYearlyAggregator()
 
-	// Template: iterate through trips, extract value using strategy
 	for _, trip := range *data {
 		year := trip.StartAt.Year()
 		value := strategy.ExtractValueFromBusinessTrip(&trip)
